@@ -24,12 +24,19 @@ export default {
   getJournalEntries: async (req: Request, res: Response) => {
     const limit = 10;
     const page = parseInt(req.params.page);
-    const totalJournalSkipped = limit * (page - 1);
-    const journalEntries = await Journal.find().skip(totalJournalSkipped).limit(limit);
+    const totalSkipped = limit * (page - 1);
+
+    const journalEntries = await Journal.find().skip(totalSkipped).limit(limit);
+
+    const totalCount = await Journal.countDocuments();
+    const totalPages = Math.ceil(totalCount / limit);
 
     Logger.info(`${req.method} ${req.url}`);
 
-    return res.status(200).json(journalEntries);
+    return res.status(200).json({
+      journals: journalEntries,
+      totalPages,
+    });
   },
 
   updateJournalEntry: async (req: Request, res: Response) => {
