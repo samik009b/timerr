@@ -23,7 +23,7 @@ const Modal = (
 ) => {
   return (
     <dialog ref={ref} className="modal">
-      <div className="modal-box bg-white text-left">
+      <div className="modal-box text-left">
         {modalHeading && <h3 className="font-bold text-lg">{modalHeading}</h3>}
 
         {children ? <div className="py-4">{children}</div> : <p className="py-4">{modalMessage}</p>}

@@ -32,19 +32,15 @@ function JournalCard({ id, day, text, productivityrating }: Props) {
     const success = await deleteJournal(id);
     if (success) {
       dialogRef.current?.close();
-      // parent state update still missing
     }
   };
 
   return (
     <div className="card w-[18rem] md:w-xl lg:w-3xl my-1.5">
       <div className="card-body relative flex flex-col">
-        <h2 className="card-title text-md md:card-title">DAY {day}</h2>
-        <p className="text-left">{text}</p>
-        <div
-          className="badge badge-neutral badge-outline
-         text-left text-zinc-500"
-        >
+        <h2 className="card-title text-sm md:card-title">DAY {day}</h2>
+        <p className="text-left text-xs md:text-base">{text}</p>
+        <div className=" text-xs md:text-base text-left text-zinc-400/50">
           productivity: {productivityrating} / 10
         </div>
         <div className="absolute right-2 md:right-5 space-x-2 md:space-x-4">
@@ -78,7 +74,7 @@ function JournalCard({ id, day, text, productivityrating }: Props) {
             primaryButtonAction={handleSave}
           >
             <textarea
-              className="textarea textarea-bordered w-full bg-white"
+              className="textarea textarea-bordered w-full"
               value={editedText}
               onChange={(e) => setEditedText(e.target.value)}
             />
