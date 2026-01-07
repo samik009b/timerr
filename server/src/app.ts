@@ -10,7 +10,7 @@ const port = ENV.PORT;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://timerr-chi.vercel.app/"],
+    origin: ["http://localhost:5173", "https://timerr-chi.vercel.app"],
     // allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   }),
