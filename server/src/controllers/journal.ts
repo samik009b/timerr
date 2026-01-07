@@ -54,4 +54,13 @@ export default {
 
     return res.status(200).json(updatedJournal);
   },
+
+  deleteJournal: async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const deletedJournal = await Journal.findByIdAndDelete(id);
+    Logger.info(`${req.method} ${req.url}`);
+
+    return res.status(204).json(deletedJournal);
+  },
 };

@@ -1,27 +1,33 @@
-import type { MouseEventHandler, Ref } from "react";
+import type { MouseEventHandler, ReactNode, ForwardedRef } from "react";
+import { forwardRef } from "react";
 
-type modalProps = {
-  ref: Ref<HTMLDialogElement>;
-  modalHeading: string;
-  modalMessage: string;
+type ModalProps = {
+  modalHeading?: string;
+  modalMessage?: string;
   primaryButton: string;
   secondaryButton: string;
   primaryButtonAction?: MouseEventHandler<HTMLButtonElement>;
+  children?: ReactNode;
 };
 
-function Modal({
-  ref,
-  modalHeading,
-  modalMessage,
-  primaryButton = "confirm",
-  secondaryButton = "close",
-  primaryButtonAction,
-}: modalProps) {
+const Modal = (
+  {
+    modalHeading,
+    modalMessage,
+    primaryButton = "Confirm",
+    secondaryButton = "Close",
+    primaryButtonAction,
+    children,
+  }: ModalProps,
+  ref: ForwardedRef<HTMLDialogElement>,
+) => {
   return (
     <dialog ref={ref} className="modal">
       <div className="modal-box bg-white text-left">
-        <h3 className="font-bold text-lg">{modalHeading}</h3>
-        <p className="py-4">{modalMessage}</p>
+        {modalHeading && <h3 className="font-bold text-lg">{modalHeading}</h3>}
+
+        {children ? <div className="py-4">{children}</div> : <p className="py-4">{modalMessage}</p>}
+
         <div className="modal-action">
           <form method="dialog" className="space-x-3">
             <button onClick={primaryButtonAction ?? undefined} className="btn">
@@ -33,6 +39,6 @@ function Modal({
       </div>
     </dialog>
   );
-}
+};
 
-export default Modal;
+export default forwardRef(Modal);

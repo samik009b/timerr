@@ -5,4 +5,5 @@ export const router = Router();
 
 router.post("/journal", journal.createJournalEntry);
 router.get("/journal/:page", journal.getJournalEntries);
-router.patch('/journal/:id', journal.updateJournalEntry)
+router.patch("/journal/:id", journal.updateJournalEntry);
+router.delete("/journal/:id", journal.deleteJournal);
