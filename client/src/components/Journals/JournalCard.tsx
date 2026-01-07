@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import Modal from "../ui/Modal";
 import deleteJournal from "../../utils/deleteJournal";
 import updateJournal from "../../utils/updateJournal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 type Props = {
   id: string;
@@ -19,7 +21,7 @@ function JournalCard({ id, day, text, productivityrating }: Props) {
   const handleSave = async () => {
     try {
       console.log("handleSave called");
-      
+
       await updateJournal(id, editedText.trim());
     } catch (error) {
       console.error("cant update the text field");
@@ -35,25 +37,30 @@ function JournalCard({ id, day, text, productivityrating }: Props) {
   };
 
   return (
-    <div className="card bg-white w-3xl my-2">
-      <div className="card-body relative">
-        <h2 className="card-title">DAY {day}</h2>
+    <div className="card w-[18rem] md:w-xl lg:w-3xl my-1.5">
+      <div className="card-body relative flex flex-col">
+        <h2 className="card-title text-md md:card-title">DAY {day}</h2>
         <p className="text-left">{text}</p>
-        <p className=" text-gray-400 text-left">{productivityrating}/10</p>
-        <div className="absolute right-5 space-x-2">
+        <div
+          className="badge badge-neutral badge-outline
+         text-left text-zinc-500"
+        >
+          productivity: {productivityrating} / 10
+        </div>
+        <div className="absolute right-2 md:right-5 space-x-2 md:space-x-4">
           <button
             onClick={() => {
               editRef.current?.showModal();
             }}
-            className="btn btn-outline btn-success p-2 text-xs"
+            className="text-base cursor-pointer text-center"
           >
-            Edit
+            <FontAwesomeIcon icon={faPenToSquare} />{" "}
           </button>
           <button
             onClick={() => dialogRef.current?.showModal()}
-            className="btn btn-outline btn-success p-2 text-xs"
+            className="text-base cursor-pointer text-center"
           >
-            Delete
+            <FontAwesomeIcon icon={faTrashCan} />
           </button>
 
           <Modal

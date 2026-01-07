@@ -4,7 +4,7 @@ import MenuBar from "./components/ui/MenuBar";
 
 function App() {
   return (
-    <div className="min-h-screen bg-emerald-200 flex flex-col items-center text-gray-800">
+    <div className="min-h-screen bg-gray-800 flex flex-col items-center space-y-16">
       <Timer />
       <Journals/>
       <MenuBar/>

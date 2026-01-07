@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPause, faPlay, faArrowRotateLeft, faSquare } from "@fortawesome/free-solid-svg-icons";
 
 interface TimerProps {
   onStop?: (totalSeconds: number) => void;
@@ -47,17 +49,24 @@ const Timer: React.FC<TimerProps> = ({ onStop }) => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="text-5xl md:text-[80px] m-12.5">{formatTime(seconds)}</p>
+    <div className="flex flex-col items-center hover:shadow-lg duration-300 shadow-gray-900 rounded-2xl md:w-150">
+      <p className="text-2xl md:text-5xl font-bold uppercase m-8">Stopwatch</p>
+      <p className="text-xl md:text-[50px] mb-3">{formatTime(seconds)}</p>
       <ul className="menu menu-horizontal font-semibold text-center text-base">
         <li>
-          <button onClick={toggle}>{isRunning ? "Pause" : "Start"}</button>
+          <button onClick={toggle}>
+            {isRunning ? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}
+          </button>
         </li>
         <li>
-          <button onClick={stop}>Stop</button>
+          <button onClick={stop}>
+            <FontAwesomeIcon icon={faSquare} />
+          </button>
         </li>
         <li>
-          <button onClick={reset}>Reset</button>{" "}
+          <button onClick={reset}>
+            <FontAwesomeIcon icon={faArrowRotateLeft} />
+          </button>
         </li>
       </ul>
     </div>

@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import JournalCard from "./JournalCard";
 import getJournals from "../../utils/getJournals";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAnglesLeft,
+  faAnglesRight,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 type JournalType = {
   _id: string;
@@ -18,6 +25,7 @@ function Journals() {
     try {
       const data = await getJournals(pageNumber);
       setJournals(data.journals);
+      console.log(journals)
       setTotalPages(data.totalPages);
     } catch (error) {
       console.error("Failed to fetch journals:", error);
@@ -33,11 +41,11 @@ function Journals() {
   const gotoLastPage = () => setPageNumber(totalPages);
 
   return (
-    <div className="flex flex-col justify-center text-center h-screen">
-      <h1 className="text-5xl underline font-bold uppercase">Reflections</h1>
+    <div className="flex flex-col justify-center text-center h-screen hover:shadow-lg duration-300 shadow-gray-900 p-1.5">
+      <h1 className="text-2xl md:text-5xl font-bold uppercase mb-8">daily jouenals</h1>
       {journals.length > 0 ? (
         <>
-          <div className="mt-4 overflow-y-auto max-h-[70vh]">
+          <div className="mt-4 overflow-y-auto max-h-[70vh] flex flex-col items-center">
             {journals.map((journal: JournalType) => (
               <JournalCard
                 id={journal._id}
@@ -49,33 +57,37 @@ function Journals() {
             ))}
           </div>
 
-          <div className="flex justify-center items-center m-2 space-x-3">
-            <button onClick={gotoFirstPage} className="btn btn-link" disabled={pageNumber === 1}>
-              First page
+          <div className="flex justify-center items-center">
+            <button
+              onClick={gotoFirstPage}
+              className="btn btn-ghost btn-lg"
+              disabled={pageNumber === 1}
+            >
+              <FontAwesomeIcon icon={faAnglesLeft} />
             </button>
             <button
               onClick={previousPage}
-              className="btn bg-emerald-600 border-none text-lg p-4"
+              className="btn btn-ghost btn-lg"
               disabled={pageNumber === 1}
             >
-              ≺
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
-            <p className="text-gray-700">
+            <p className="">
               {pageNumber} / {totalPages}
             </p>
             <button
               onClick={nextPage}
-              className="btn bg-emerald-600 border-none text-lg p-4"
+              className="btn btn-ghost btn-lg"
               disabled={pageNumber === totalPages}
             >
-              ≻
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
             <button
               onClick={gotoLastPage}
-              className="btn btn-link"
+              className="btn btn-ghost btn-lg"
               disabled={pageNumber === totalPages}
             >
-              Last page
+              <FontAwesomeIcon icon={faAnglesRight} />
             </button>
           </div>
         </>

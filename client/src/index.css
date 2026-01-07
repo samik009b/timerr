@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@font-face {
+  font-family: montserrat-regular;
+  src: url("../src/assets/fonts/Montserrat-Regular.ttf");
+}
+
 * {
   box-sizing: border-box;
+  font-family: montserrat-regular;
 }
