@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "../ui/Modal";
-import deleteJournal from "../../utils/deleteJournal";
-import updateJournal from "../../utils/updateJournal";
+import journal from "../../api/journal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import type { JournalProps } from "../../types/journalProps";
@@ -41,7 +40,7 @@ function JournalCard({ _id, day, text, productivityRating }: JournalProps) {
     if (!trimmed) return;
 
     try {
-      await updateJournal(_id, trimmed);
+      await journal.updateJournal(_id, trimmed);
       closeEditModal();
     } catch (err) {
       console.error("Failed to update journal", err);
@@ -50,7 +49,7 @@ function JournalCard({ _id, day, text, productivityRating }: JournalProps) {
 
   const handleDelete = async () => {
     try {
-      const success = await deleteJournal(_id);
+      const success = await journal.deleteJournal(_id);
       if (success) deleteRef.current?.close();
     } catch (err) {
       console.error("Failed to delete journal", err);

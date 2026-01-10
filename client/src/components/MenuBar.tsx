@@ -1,4 +1,4 @@
-import addNewJournal from "../utils/addNewJournal";
+import journal from "../api/journal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faStopwatch20, faChartLine, faBook } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,7 +31,7 @@ function MenuBar() {
         </ul>
       </div>
       <button
-        onClick={addNewJournal}
+        onClick={journal.addNewJournal}
         className="bg-base-300 rounded-box px-3 hover:bg-gray-700 active:bg-gray-600 cursor-pointer"
       >
         <FontAwesomeIcon icon={faPlus} />

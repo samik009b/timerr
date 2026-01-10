@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import JournalCard from "./JournalCard";
-import getJournals from "../../utils/getJournals";
+import JournalCard from "../components/Journals/JournalCard";
+import journal from "../api/journal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAnglesLeft,
@@ -8,7 +8,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import type { JournalProps } from "../../types/journalProps";
+import type { JournalProps } from "../types/journalProps";
 
 function Journals() {
   const [journals, setJournals] = useState<JournalProps[]>([]);
@@ -17,7 +17,7 @@ function Journals() {
 
   const fetchJournals = async () => {
     try {
-      const data = await getJournals(pageNumber);
+      const data = await journal.getJournals(pageNumber);
       setJournals(data.journals);
       console.log(journals);
       setTotalPages(data.totalPages);
