@@ -1,14 +1,6 @@
-import type { MouseEventHandler, ReactNode, ForwardedRef } from "react";
+import type { ForwardedRef } from "react";
 import { forwardRef } from "react";
-
-type ModalProps = {
-  modalHeading?: string;
-  modalMessage?: string;
-  primaryButton: string;
-  secondaryButton: string;
-  primaryButtonAction?: MouseEventHandler<HTMLButtonElement>;
-  children?: ReactNode;
-};
+import type { ModalProps } from "../../types/modal";
 
 const Modal = (
   {

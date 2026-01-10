@@ -1,4 +1,4 @@
-import addNewJournal from "../../utils/addNewJournal";
+import addNewJournal from "../utils/addNewJournal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faStopwatch20, faChartLine, faBook } from "@fortawesome/free-solid-svg-icons";
 

@@ -8,16 +8,10 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-
-type JournalType = {
-  _id: string;
-  day: number;
-  text: string;
-  productivityRating: number;
-};
+import type { JournalProps } from "../../types/journalProps";
 
 function Journals() {
-  const [journals, setJournals] = useState<JournalType[]>([]);
+  const [journals, setJournals] = useState<JournalProps[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -25,7 +19,7 @@ function Journals() {
     try {
       const data = await getJournals(pageNumber);
       setJournals(data.journals);
-      console.log(journals)
+      console.log(journals);
       setTotalPages(data.totalPages);
     } catch (error) {
       console.error("Failed to fetch journals:", error);
@@ -46,13 +40,13 @@ function Journals() {
       {journals.length > 0 ? (
         <>
           <div className="mt-4 overflow-y-auto max-h-[70vh] flex flex-col items-center">
-            {journals.map((journal: JournalType) => (
+            {journals.map((journal: JournalProps) => (
               <JournalCard
-                id={journal._id}
+                _id={journal._id}
                 key={journal._id}
                 text={journal.text}
                 day={journal.day}
-                productivityrating={journal.productivityRating}
+                productivityRating={journal.productivityRating}
               />
             ))}
           </div>

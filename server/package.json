@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/app.ts",
+    "prod": "cross-env NODE_ENV=Production tsx watch src/app.ts",
+    "dev": "cross-env NODE_ENV=Development tsx watch src/app.ts",
     "seed": "ts-node src/seeder.ts",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "cross-env NODE_ENV=Production node dist/app.js --enable-turbo-mode"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   "dependencies": {
     "chalk": "^5.6.2",
     "cors": "^2.8.5",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "prettier": "^3.7.4",

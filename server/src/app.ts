@@ -1,31 +1,25 @@
 import express, { urlencoded } from "express";
 import ENV from "./config/env";
 import Logger from "./utils/logger";
-import connectToMongoose from "./utils/db";
 import { router } from "./routes/journal";
+import { MongoDBConnector, connectToDatabase } from "./db/dbConnector";
 import cors from "cors";
+import corsConfig from "./config/corsConfig";
 
 const app = express();
 const port = ENV.PORT;
+const uri: string = ENV.MONGO_URI;
+const mongoDBConnector = new MongoDBConnector(uri);
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "https://timerr-chi.vercel.app"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  }),
-);
+app.use(cors(corsConfig));
 
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/", router);
 
-const mongodbConnectionString: string =
-  ENV.NODE_ENV === "Production" ? ENV.MONGO_URI : "mongodb://127.0.0.1/mydb";
-
 const startServer = () => {
-  connectToMongoose(mongodbConnectionString)
+  connectToDatabase(mongoDBConnector)
     .then(() => {
       app.listen(port);
     })
@@ -33,7 +27,7 @@ const startServer = () => {
       Logger.error(`server error -> ${err}`);
     })
     .finally(() => {
-      Logger.info(`env: ${ENV.NODE_ENV}, endpoint: http://localhost:${port}`);
+      Logger.info(`env: ${ENV.NODE_ENV}`);
     });
 };
 startServer();

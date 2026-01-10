@@ -69,6 +69,10 @@ const Timer: React.FC<TimerProps> = ({ onStop }) => {
           </button>
         </li>
       </ul>
+      <div className="text-center flex justify-between m-3 w-48 md:w-100 ">
+        <p>study 8h</p>
+        <p>sprints 3</p>
+      </div>
     </div>
   );
 };
